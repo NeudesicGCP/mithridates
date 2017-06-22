@@ -75,7 +75,10 @@ function processStorageObject(uri, params) {
     .then((data) => {
       console.log('Operation has finished:', data);
       return data[0]
-        .map((result) => result.transcript)
+        .map((result) => {
+          console.log('Confidence:', result.confidence, ', Transcript:', result.transcript);
+          return result.transcript;
+        })
         .reduce((accumulator, element) => '' + accumulator + element, '');
     });
 };
