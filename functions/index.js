@@ -9,6 +9,7 @@
 
 const storage = require('@google-cloud/storage');
 const speech = require('@google-cloud/speech')();
+const datastore = require('@google-cloud/datastore')();
 
 /**
  * Handles changes to a cloud storage bucket item.
@@ -49,6 +50,14 @@ exports.storageHandler = (event) => {
   return processStorageObject(uri, params)
     .then((transcript) => {
       console.log('Transcript:', transcript);
+      const key = datastore.key('transcript');
+      const record = {
+        key: key,
+        data: {
+          transcript: transcript
+        }
+      };
+      return datastore.save(record);
     });
 };
 
