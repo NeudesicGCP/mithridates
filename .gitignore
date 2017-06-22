@@ -1,0 +1,2 @@
+# Don't store node_modules in git
+node_modules

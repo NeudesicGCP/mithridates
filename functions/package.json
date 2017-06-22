@@ -1,0 +1,31 @@
+{
+  "name": "mithridates",
+  "version": "1.0.0",
+  "description": "A serverless hyperpolyglot using Google Cloud Functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeudesicGCP/mithridates.git"
+  },
+  "keywords": [
+    "Cloud",
+    "Cloud Functions",
+    "GCP",
+    "Google Cloud Platform",
+    "Cloud Speech API",
+    "Cloud Storage"
+  ],
+  "author": "Matthew Emes <matthew.emes@neudesic.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NeudesicGCP/mithridates/issues"
+  },
+  "homepage": "https://github.com/NeudesicGCP/mithridates#readme",
+  "dependencies": {
+    "@google-cloud/speech": "^0.9.3",
+    "@google-cloud/storage": "^1.1.1"
+  }
+}
