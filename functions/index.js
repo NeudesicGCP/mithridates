@@ -57,7 +57,13 @@ exports.storageHandler = (event) => {
           transcript: transcript
         }
       };
-      return datastore.save(record);
+      return datastore.save(record)
+        .then(() => {
+          console.log('Saved record:', record);
+        });
+    })
+    .catch((err) => {
+      console.error('Caught an error:', err);
     });
 };
 
