@@ -54,7 +54,8 @@ exports.storageHandler = (event) => {
       const record = {
         key: key,
         data: {
-          transcript: transcript
+          transcript: transcript,
+          ts: Date.now()
         }
       };
       return datastore.save(record)
