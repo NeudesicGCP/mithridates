@@ -10,6 +10,7 @@
 const storage = require('@google-cloud/storage');
 const speech = require('@google-cloud/speech')();
 const datastore = require('@google-cloud/datastore')();
+const translate = require('@google-cloud/translate')();
 
 /**
  * Handles changes to a cloud storage bucket item.
@@ -50,18 +51,24 @@ exports.storageHandler = (event) => {
   return processStorageObject(uri, params)
     .then((transcript) => {
       console.log('Transcript:', transcript);
-      const key = datastore.key('transcript');
-      const record = {
-        key: key,
-        data: {
-          transcript: transcript,
-          ts: Date.now()
-        }
-      };
-      return datastore.save(record)
-        .then(() => {
-          console.log('Saved record:', record);
-        });
+	  const newLanguage = 'es';
+      return translate.translate(transcript, newLanguage)
+	  	.then((translation) => {
+	  	  console.log('Translation: ', translation);
+	  	  const key = datastore.key('transcript');
+      	  const record = {
+        	key: key,
+        	data: {
+          	  transcript: transcript,
+          	  translation: translation,
+          	  ts: Date.now()
+        	}
+      	  };
+      	return datastore.save(record)
+          .then(() => {
+          	console.log('Saved record:', record);
+          });
+      });
     })
     .catch((err) => {
       console.error('Caught an error:', err);
